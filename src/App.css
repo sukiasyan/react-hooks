@@ -1,24 +1,20 @@
-.App {
+.App h1 {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App .workouts-wrapper {
+  margin-left: 30px;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.App .workouts-wrapper .activity-wrapper {
+  display: flex;
+  align-items: center;
 }
-
-.App-intro {
-  font-size: large;
+.App .workouts-wrapper .activity-wrapper button {
+  margin-left: 20px;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App .workouts-wrapper .add {
+  display: flex;
+  align-items: flex-end;
+}
+.App .workouts-wrapper .add .input-section {
+  margin-right: 20px;
 }

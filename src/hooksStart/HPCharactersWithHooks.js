@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react"
 
 export default function HPCharactersWithHooks() {
-  const [characters, setCharacters] = useState("")
+  const [characters, setCharacters] = useState([])
   const [searchString, setSearchString] = useState("")
+  const [filteredCharacters, setFilteredCharacters] = useState([])
 
   useEffect(() => {
     const getData = async () => {
@@ -10,12 +11,25 @@ export default function HPCharactersWithHooks() {
         const res = await fetch("https://hp-api.herokuapp.com/api/characters")
         const characters = await res.json()
         setCharacters(characters)
+        setFilteredCharacters([...characters])
       } catch (err) {
         console.log(err)
       }
     }
     getData()
   }, [])
+
+
+  useEffect(() => {
+    let filteredCharacters = characters;
+    if (searchString && characters.length > 0) {
+      filteredCharacters = characters.filter(character =>
+        character.name.includes(searchString)
+      );
+    }
+    setFilteredCharacters(filteredCharacters);
+  }, [searchString, characters]);
+
   return (
     <div>
       <h1>Harry Potter</h1>
@@ -31,11 +45,12 @@ export default function HPCharactersWithHooks() {
       </form>
       <ul>
         {characters &&
-          characters.map((character, index) => (
+        filteredCharacters.map((character, index) => (
             <li key={index}>
+              {console.log("character", character)}
               <h2>{character.name}</h2>
               <p>House: {character.house}</p>
-              <img src={character.image}/>
+              <img src={character.image} />
             </li>
           ))}
       </ul>
